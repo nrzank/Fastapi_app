@@ -26,6 +26,5 @@ RUN pip install poetry==1.8.3 && poetry config virtualenvs.create false && poetr
 
 RUN poetry install --no-root
 
-
-CMD uvicorn main:app --reload --host "localhost" --port 8000
+CMD uvicorn main:app --reload --host 0.0.0.0 --port 8000
 
