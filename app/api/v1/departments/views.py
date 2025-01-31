@@ -13,7 +13,6 @@ router = APIRouter(tags=["Departments"])
 
 @router.get("/", response_model=List[Department])
 async def get_departments(session: AsyncSession = Depends(get_session)):
-
     return await crud.get_departments(session=session)
 
 
@@ -30,6 +29,7 @@ async def create_department(department: DepartmentCreate,
 async def get_department_by_id(department_id: int,
                                session: AsyncSession = Depends(get_session)
                                ):
+
     department = await crud.get_department_by_id(session=session, department_id=department_id)
     if department:
         return department
@@ -45,6 +45,7 @@ async def update_department(department_id: int,
                             department_update: DepartmentUpdate,
                             session: AsyncSession = Depends(get_session)
                             ):
+
     updated_department = await crud.update_department(session=session, department_id=department_id,
                                                       department_update=department_update)
 

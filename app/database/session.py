@@ -9,8 +9,8 @@ db_url = os.getenv("DATABASE_URL")
 if not db_url:
     raise ValueError("DATABASE_URL не задано в файле .env")
 
-engine = create_async_engine(db_url, future=True, echo=True)
 
+engine = create_async_engine(db_url, future=True, echo=True)
 async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 

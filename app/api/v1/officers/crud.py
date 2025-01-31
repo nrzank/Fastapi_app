@@ -12,22 +12,29 @@ async def get_officers(session: AsyncSession) -> List[Officer]:
     return list(officers)
 
 
-async def get_officer_by_id(session: AsyncSession, officer_id: int) -> Optional[dict]:
+async def get_officer_by_id(session: AsyncSession,
+                            officer_id: int
+                            ) -> Optional[dict]:
     officer = await session.get(Officer, officer_id)
     if officer:
         return {"id": officer.id,
                 "first_name": officer.first_name,
-                "last_name": officer.last_name}
+                "last_name": officer.last_name
+                }
     return None
 
 
-async def get_officer_by_email(session: AsyncSession, email: str):
+async def get_officer_by_email(session: AsyncSession,
+                               email: str
+                               ):
     stmt = select(Officer).where(Officer.email == email)
     result = await session.execute(stmt)
     return result.scalars().first()
 
 
-async def create_officer(session: AsyncSession, officer: OfficerCreate) -> Officer:
+async def create_officer(session: AsyncSession,
+                         officer: OfficerCreate
+                         ) -> Officer:
     new_officer = Officer(**officer.model_dump())
     session.add(new_officer)
     await session.commit()

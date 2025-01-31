@@ -19,6 +19,7 @@ services:
       timeout: 5s
       retries: 5
 
+
   app:
     build: ./
     container_name: fastapi_app
@@ -35,8 +36,10 @@ services:
     volumes:
       - .:/Fastapi_app
 
+
 volumes:
   postgres_data:
+
 
 networks:
   app_network:

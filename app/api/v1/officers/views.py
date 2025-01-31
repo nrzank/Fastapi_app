@@ -16,6 +16,7 @@ router = APIRouter(tags=["Officer"])
 
 @router.get("/", response_model=List[Officer])
 async def get_officers(session: AsyncSession = Depends(get_session)):
+
     try:
         officers = await crud.get_officers(session=session)
         return officers
@@ -32,6 +33,7 @@ async def create_officer(
         session: AsyncSession = Depends(get_session),
         current_user: dict = Depends(get_current_user)
 ):
+
     try:
         department = await get_department_by_id(session, officer.department_id)
         if not department:
@@ -75,6 +77,7 @@ async def update_officer(
         session: AsyncSession = Depends(get_session),
         current_user: dict = Depends(get_current_user)
 ):
+
     try:
         updated_officer = await crud.update_officer(session, officer_id, officer_update)
         if not updated_officer:
@@ -96,6 +99,7 @@ async def delete_officer(
         session: AsyncSession = Depends(get_session),
         current_user: dict = Depends(get_current_user)
 ):
+
     try:
         success = await crud.delete_officer(session=session, officer_id=officer_id)
         if not success:
