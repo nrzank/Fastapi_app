@@ -21,6 +21,12 @@ async def get_officer_by_id(session: AsyncSession, officer_id: int) -> Optional[
     return None
 
 
+async def get_officer_by_email(session: AsyncSession, email: str):
+    stmt = select(Officer).where(Officer.email == email)
+    result = await session.execute(stmt)
+    return result.scalars().first()
+
+
 async def create_officer(session: AsyncSession, officer: OfficerCreate) -> Officer:
     new_officer = Officer(**officer.model_dump())
     session.add(new_officer)

@@ -8,6 +8,9 @@ class OfficerBase(BaseModel):
     email: EmailStr
     department_id: int
 
+    class Config:
+        from_attributes = True
+
 
 class OfficerCreate(OfficerBase):
     pass
