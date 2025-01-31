@@ -49,8 +49,10 @@ async def create_officer(
         )
 
 
-@router.get("/{officer_id}", response_model=dict)
-async def get_officer_by_id(officer_id: int, session: AsyncSession = Depends(get_session)):
+@router.get("/{officer_id}/", response_model=dict)
+async def get_officer_by_id(officer_id: int,
+                            session: AsyncSession = Depends(get_session)
+                            ):
     try:
         officer = await crud.get_officer_by_id(session=session, officer_id=officer_id)
         if officer:
@@ -66,7 +68,7 @@ async def get_officer_by_id(officer_id: int, session: AsyncSession = Depends(get
         )
 
 
-@router.put("/{officer_id}", response_model=OfficerUpdate)
+@router.put("/{officer_id}/", response_model=OfficerUpdate)
 async def update_officer(
         officer_id: int,
         officer_update: OfficerUpdate,
@@ -88,7 +90,7 @@ async def update_officer(
         )
 
 
-@router.delete("/{officer_id}", response_model=dict)
+@router.delete("/{officer_id}/", response_model=dict)
 async def delete_officer(
         officer_id: int,
         session: AsyncSession = Depends(get_session),

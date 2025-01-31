@@ -26,7 +26,7 @@ async def create_department(department: DepartmentCreate,
     return await crud.create_department(session=session, department=department)
 
 
-@router.get("/{department_id}", response_model=Department)
+@router.get("/{department_id}/", response_model=Department)
 async def get_department_by_id(department_id: int,
                                session: AsyncSession = Depends(get_session)
                                ):
@@ -40,7 +40,7 @@ async def get_department_by_id(department_id: int,
     )
 
 
-@router.put("/{department_id}", response_model=Department)
+@router.put("/{department_id}/", response_model=Department)
 async def update_department(department_id: int,
                             department_update: DepartmentUpdate,
                             session: AsyncSession = Depends(get_session)
@@ -63,7 +63,7 @@ async def update_department(department_id: int,
     return updated_department
 
 
-@router.delete("/{department_id}", response_model=dict)
+@router.delete("/{department_id}/", response_model=dict)
 async def delete_department(department_id: int,
                             session: AsyncSession = Depends(get_session),
                             current_user: dict = Depends(get_current_user)):
