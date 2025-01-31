@@ -1,14 +1,12 @@
-import os
-import sys
+from contextlib import asynccontextmanager
 
 import uvicorn
 from fastapi import FastAPI
 from fastapi.security import OAuth2PasswordBearer
-from api.v1 import router as router_v1
-from database import engine
-from models import Base
 
-from contextlib import asynccontextmanager
+from app.api.v1 import router
+from app.database.models import Base
+from app.database.session import engine
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -20,15 +18,17 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(lifespan=lifespan)
-app.include_router(router=router_v1, prefix='/api/v1')
+app = FastAPI(
+    lifespan=lifespan,
+    openapi_url="/api/v1/openapi.json",
+    debug=True,
+)
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append("/app")
+app.include_router(router, prefix='/api/v1')
 
 if __name__ == "__main__":
     uvicorn.run(
         app,
-        host="0.0.0.0",
+        host="localhost",
         port=8000,
     )

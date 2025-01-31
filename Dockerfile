@@ -1,20 +1,30 @@
-FROM python:3.11-slim
+FROM python:3.11.9-alpine
+
+RUN apk update && apk add --no-cache \
+    curl \
+    build-base \
+    libpq-dev \
+    vim \
+    && rm -rf /var/cache/apk/*
+
+
 
 WORKDIR /Fastapi_app
+ENV PYTHONPATH="/Fastapi_app"
 
-# Копирование pyproject.toml и poetry.lock в рабочую директорию
-COPY app/pyproject.toml ./
-COPY app/poetry.lock ./
 
-# Установка poetry и зависимостей
+
+COPY app /Fastapi_app/app
+
+COPY main.py ./
+COPY .env ./
+COPY pyproject.toml poetry.lock ./
+
+
+RUN pip install --upgrade pip
 RUN pip install poetry==1.8.3 && poetry config virtualenvs.create false && poetry install --no-root
+RUN poetry install --no-root
 
-# Копирование папок и файлов проекта
-COPY ./app /app/
-COPY app/test /test/
-COPY app/main.py ./
 
-RUN apt-get update && apt-get install -y vim
+CMD uvicorn main:app --reload --host "localhost" --port 8000
 
-# Запуск приложения
-CMD uvicorn main:app --reload --host 0.0.0.0 --port 8000

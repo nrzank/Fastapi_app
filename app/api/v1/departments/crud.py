@@ -2,8 +2,8 @@ from typing import List, Optional
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from database.models import Department
-from api.v1.departments.schemas import DepartmentCreate, DepartmentUpdate
+from app.database.models import Department
+from app.api.v1.departments.schemas import DepartmentCreate, DepartmentUpdate
 
 
 async def get_departments(session: AsyncSession) -> List[Department]:

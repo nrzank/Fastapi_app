@@ -2,8 +2,8 @@ from typing import List, Optional
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from database.models import Officer
-from api.v1.officers.schemas import OfficerCreate, OfficerUpdate
+from app.database.models import Officer
+from app.api.v1.officers.schemas import OfficerCreate, OfficerUpdate
 
 
 async def get_officers(session: AsyncSession) -> List[Officer]:

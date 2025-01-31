@@ -3,10 +3,10 @@ from typing import List
 from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from api.v1.departments import crud
-from api.v1.departments.schemas import Department, DepartmentCreate, DepartmentUpdate
-from api.v1.auth.auth import get_current_user
-from database.session import get_session
+from app.api.v1.departments import crud
+from app.api.v1.departments.schemas import Department, DepartmentCreate, DepartmentUpdate
+from app.api.v1.auth.auth import get_current_user
+from app.database.session import get_session
 
 router = APIRouter(tags=["Departments"])
 
