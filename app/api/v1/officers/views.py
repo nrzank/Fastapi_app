@@ -33,8 +33,14 @@ async def create_officer(
         session: AsyncSession = Depends(get_session),
         current_user: dict = Depends(get_current_user)
 ):
+    if officer.department_id is None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Department ID is required"
+        )
 
     try:
+
         department = await get_department_by_id(session, officer.department_id)
         if not department:
             raise HTTPException(

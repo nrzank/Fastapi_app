@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import BaseModel
 
 
@@ -14,7 +16,7 @@ class DepartmentUpdate(BaseModel):
 
 
 class Department(DepartmentBase):
-    id: int
+    id: Optional[int]
 
     class Config:
         from_attributes = True

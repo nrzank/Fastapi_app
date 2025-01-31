@@ -26,8 +26,8 @@ class Officer(OfficerBase):
 class OfficerUpdate(BaseModel):
     first_name: Optional[str] = None
     last_name: Optional[str] = None
-    email: Optional[EmailStr] = None
-    department_id: Optional[int] = None
+    email: EmailStr
+    department_id: int
 
     class Config:
         from_attributes = True
