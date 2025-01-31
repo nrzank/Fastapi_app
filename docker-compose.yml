@@ -14,7 +14,7 @@ services:
     networks:
       - app_network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres1234 -d postgres1234"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres1234"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -27,7 +27,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql+asyncpg://postgres1234:1234@db:5432/postgres1234
+      DATABASE_URL: postgresql+asyncpg://postgres:1234@db:5432/postgres1234
     ports:
       - "8000:8000"
     networks:
