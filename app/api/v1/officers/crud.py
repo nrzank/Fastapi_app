@@ -47,7 +47,9 @@ async def update_officer(session: AsyncSession,
     return None
 
 
-async def delete_officer(session: AsyncSession, officer_id: int) -> bool:
+async def delete_officer(session: AsyncSession,
+                         officer_id: int
+                         ) -> bool:
     result = await session.execute(select(Officer).filter(Officer.id == officer_id))
     officer = result.scalar_one_or_none()
 

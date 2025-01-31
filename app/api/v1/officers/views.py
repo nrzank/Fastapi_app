@@ -26,7 +26,9 @@ async def create_officer(officer: OfficerCreate,
 
 
 @router.get("/{officer_id}", response_model=dict)
-async def get_officer_by_id(officer_id: int, session: AsyncSession = Depends(get_session)):
+async def get_officer_by_id(officer_id: int,
+                            session: AsyncSession = Depends(get_session)
+                            ):
     officer = await crud.get_officer_by_id(session=session, officer_id=officer_id)
 
     if officer:

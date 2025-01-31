@@ -26,7 +26,9 @@ async def create_department(department: DepartmentCreate,
 
 
 @router.get("/{department_id}", response_model=Department)
-async def get_department_by_id(department_id: int, session: AsyncSession = Depends(get_session)):
+async def get_department_by_id(department_id: int,
+                               session: AsyncSession = Depends(get_session)
+                               ):
     department = await crud.get_department_by_id(session=session, department_id=department_id)
 
     if department:

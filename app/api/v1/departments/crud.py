@@ -12,11 +12,15 @@ async def get_departments(session: AsyncSession) -> List[Department]:
     return list(departments)
 
 
-async def get_department_by_id(session: AsyncSession, department_id: int) -> Optional[Department]:
+async def get_department_by_id(session: AsyncSession,
+                               department_id: int
+                               ) -> Optional[Department]:
     return await session.get(Department, department_id)
 
 
-async def create_department(session: AsyncSession, department: DepartmentCreate) -> Department:
+async def create_department(session: AsyncSession,
+                            department: DepartmentCreate
+                            ) -> Department:
     new_department = Department(name=department.name)
     session.add(new_department)
     await session.commit()
